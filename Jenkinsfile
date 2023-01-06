@@ -15,10 +15,38 @@ pipeline {
         //un autre stage que nous allons nommer build, c'est dans lui
         //que nous allons mettre les commande pour build le projet
         stage('Build'){
-        //nous allons faire juste un maven package
+        //nous allons lancer jacoco
             steps{
-                sh 'mvn clean package'
+                sh ' mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install'
             }
+        }
+        stage('SonarQube Analysis'){
+            steps{
+                sh 'mvn sonar:sonar'
+            }
+        }
+        stage('Input pour approuver le déploiement'){
+
+            input{
+                message 'Voulez vous proccéder au déploiement?'
+            }
+            steps {
+                sh 'echo "Déploiement sur le server."'
+            }
+        }
+    } //fin stages
+    post{
+        //si l'opération a été arreté
+        aborted{
+            echo "Sending message to Agent"
+        }
+        //si l'opération a echoué
+        failure{
+            echo "Sending message to Agent"
+        }
+        //si l'opération a été un succes
+        success{
+            echo "Sending message to Agent"
         }
     }
 }
