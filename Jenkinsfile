@@ -31,6 +31,7 @@ pipeline {
             }
         }
         stage('build'){
+            agent any
             steps{
                 sh 'docker build -t dockerclbi/groupe:latest .'
 
