@@ -30,24 +30,32 @@ pipeline {
                 sh 'echo "Déploiement sur le dev1."'
             }
         }
-        stage('Build image') {
-            steps {
-                sh 'dockerclbi/agl_m1sir:latest'
+        stage('logout docker'){
+            steps{
+                sh 'docker logout'
             }
         }
+//         stage('Build image') {
+//             steps {
+//                 sh 'dockerclbi/agl_m1sir:1'
+//             }
+//             steps {
+//                 sh 'docker tag agl_m1sir dockerclbi/agl_m1sir'
+//             }
+//         }
     } //fin stages
-    post{
-        //si l'opération a été arreté
-        aborted{
-            echo "Sending message to Agent"
-        }
-        //si l'opération a echoué
-        failure{
-            echo "Sending message to Agent"
-        }
-        //si l'opération a été un succes
-        success{
-            echo "Sending message to Agent"
-        }
-    }
+//     post{
+//         //si l'opération a été arreté
+//         aborted{
+//             echo "Sending message to Agent"
+//         }
+//         //si l'opération a echoué
+//         failure{
+//             echo "Sending message to Agent"
+//         }
+//         //si l'opération a été un succes
+//         success{
+//             echo "Sending message to Agent"
+//         }
+//     }
 }
