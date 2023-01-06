@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Build image') {
             steps {
-                sh 'dockerclbi/groupe2:latest'
+                sh 'dockerclbi/agl_m1sir:latest'
             }
         }
     } //fin stages
