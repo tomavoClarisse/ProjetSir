@@ -30,6 +30,9 @@ pipeline {
                 sh 'echo "Déploiement sur le dev1."'
             }
         }
+        stage('Build image') {
+               dockerImage = docker.build("dockerclbi/groupe2:latest")
+        }
     } //fin stages
     post{
         //si l'opération a été arreté
