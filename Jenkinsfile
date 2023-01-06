@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Input pour approuver le déploiement'){
             steps {
-                sh 'echo "Déploiement sur le server."'
+                sh 'echo "Déploiement sur le dev."'
             }
         }
     } //fin stages
