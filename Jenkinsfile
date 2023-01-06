@@ -4,9 +4,12 @@ pipeline {
     //install the maven version
     maven "3.8.6"
     }
+    environment{
+        DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+    }
     stages{
     //les etapes de notre automatisation
-        stage('LaSource'){
+        stage('LaSource' ){
         //le premier steps, on lui indique d'aller chercher le repository logé à l'url
             steps{
                 git branch: 'main', url: 'https://github.com/tomavoClarisse/ProjetSir'
@@ -35,11 +38,16 @@ pipeline {
                 sh 'docker logout'
             }
         }
+//         stage('login docker'){
+//             steps{
+//                 sh ' docker login -u "dockerclbi" -p "clarisse." '
+//             }
+//         }
 //         stage('Build image') {
 //             steps {
-//                 sh 'dockerclbi/agl_m1sir:1'
+//                 sh ' docker build -t dockerclbi/groupe2:latest . '
 //             }
-//             steps {
+// //             steps {
 //                 sh 'docker tag agl_m1sir dockerclbi/agl_m1sir'
 //             }
 //         }
