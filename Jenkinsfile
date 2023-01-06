@@ -31,7 +31,9 @@ pipeline {
             }
         }
         stage('Build image') {
-               dockerImage = docker.build("dockerclbi/groupe2:latest")
+            steps {
+                sh 'dockerclbi/groupe2:latest'
+            }
         }
     } //fin stages
     post{
