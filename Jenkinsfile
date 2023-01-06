@@ -4,9 +4,6 @@ pipeline {
     //install the maven version
     maven "3.8.6"
     }
-//     environment{
-//         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-//     }
     stages{
     //les etapes de notre automatisation
         stage('LaSource' ){
@@ -33,36 +30,32 @@ pipeline {
                 sh 'echo "Déploiement sur le dev1."'
             }
         }
-//         stage('logout docker'){
-//             steps{
-//                 sh 'docker logout'
-//             }
-//         }
-//         stage('login docker'){
-//             steps{
-//                 sh ' echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin '
+        stage('build'){
+            steps{
+                sh 'docker build -t dockerclbi/groupe:latest .'
 
-//             }
-//         }
-        stage('push') {
-            steps {
-                sh ' docker push dockerclbi/agl_m1sir:latest'
             }
-
         }
+
+//         stage('push') {
+//             steps {
+//                 sh ' docker push dockerclbi/agl_m1sir:latest'
+//             }
+//
+//         }
     } //fin stages
-//     post{
-//         //si l'opération a été arreté
-//         aborted{
-//             echo "Sending message to Agent"
-//         }
-//         //si l'opération a echoué
-//         failure{
-//             echo "Sending message to Agent"
-//         }
-//         //si l'opération a été un succes
-//         success{
-//             echo "Sending message to Agent"
-//         }
-//     }
+    post{
+        //si l'opération a été arreté
+        aborted{
+            echo "Sending message to Agent"
+        }
+        //si l'opération a echoué
+        failure{
+            echo "Sending message to Agent"
+        }
+        //si l'opération a été un succes
+        success{
+            echo "Sending message to Agent"
+        }
+    }
 }
