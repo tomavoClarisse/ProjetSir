@@ -4,9 +4,9 @@ pipeline {
     //install the maven version
     maven "3.8.6"
     }
-    environment{
-        DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-    }
+//     environment{
+//         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+//     }
     stages{
     //les etapes de notre automatisation
         stage('LaSource' ){
@@ -33,23 +33,22 @@ pipeline {
                 sh 'echo "Déploiement sur le dev1."'
             }
         }
-        stage('logout docker'){
-            steps{
-                sh 'docker logout'
-            }
-        }
-//         stage('login docker'){
+//         stage('logout docker'){
 //             steps{
-//                 sh ' docker login -u "dockerclbi" -p "clarisse." '
+//                 sh 'docker logout'
 //             }
 //         }
-//         stage('Build image') {
+//         stage('login docker'){
+//             steps{
+//                 sh ' echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin '
+
+//             }
+//         }
+//         stage('push') {
 //             steps {
-//                 sh ' docker build -t dockerclbi/groupe2:latest . '
+//                 sh ' docker push dockerclbi/agl_m1sir:latest'
 //             }
-// //             steps {
-//                 sh 'docker tag agl_m1sir dockerclbi/agl_m1sir'
-//             }
+
 //         }
     } //fin stages
 //     post{
