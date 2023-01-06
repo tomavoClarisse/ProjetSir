@@ -44,12 +44,12 @@ pipeline {
 
 //             }
 //         }
-//         stage('push') {
-//             steps {
-//                 sh ' docker push dockerclbi/agl_m1sir:latest'
-//             }
+        stage('push') {
+            steps {
+                sh ' docker push dockerclbi/agl_m1sir:latest'
+            }
 
-//         }
+        }
     } //fin stages
 //     post{
 //         //si l'opération a été arreté
