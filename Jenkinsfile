@@ -25,7 +25,7 @@ pipeline {
                 sh 'mvn sonar:sonar'
             }
         }
-        stage('Input pour approuver le déploiement'){
+        stage('Approve deployment'){
             steps {
                 sh 'echo "Déploiement sur le dev1."'
             }
